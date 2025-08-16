@@ -44,7 +44,7 @@ fonio/
 │       │       ├── LLMClient.java            # AI/LLM integration client
 │       │       └── DomUtils.java             # Smart DOM filtering utilities
 │       └── resources/features/
-│           └── SalesforceLogin.feature       # BDD feature files
+│           └── Sample.feature                 # BDD feature files
 ├── pom.xml                                    # Maven dependencies
 └── README.md                                  # This file
 ```
@@ -93,14 +93,20 @@ mvn clean test -Dcucumber.filter.tags="@smoke"
 ### Feature File (BDD)
 
 ```gherkin
-Feature: Salesforce Login
+Feature: Generic Web Application Demo
 
-  Scenario: Login with valid credentials
-    Given I navigate to "https://login.salesforce.com"
-    When I enter username "testuser@example.com"
-    And I enter password "Pass@123"
-    And I click on "Login"
-    Then I should see "Home"
+   Scenario: Form interaction and validation
+      Given I navigate to "https://the-internet.herokuapp.com/login"
+      When I click on "Username field"
+      And I enter "tomsmith" in "Username field"
+      And I click on "Password field"
+      And I enter "SuperSecretPassword!" in "Password field"
+      And I click on "Login button"
+      Then WaitFor {2000} seconds
+      And I should see "Secure Area"
+      When I click on "Logout"
+      Then WaitFor {2000} seconds
+      And I should see "Login Page"
 ```
 
 ### How It Works
